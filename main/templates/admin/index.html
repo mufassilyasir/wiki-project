@@ -1,0 +1,77 @@
+{% extends 'admin/layout.html' %}
+
+{% block content %}
+<div class="col-lg-7 col-md-8">
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+{% if category == 'error' %}
+<div class="alert alert-danger alert-dismissable fade show">
+    {{ message }}
+</div>
+{% elif category == 'success' %}
+<div class="alert alert-success alter-dismissable fade show" role="alert">
+    {{ message }}
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endwith %}
+<div id="post" class="documentation_info">
+    <article class="documentation_body typography_content" id="documentation">
+        <div class="shortcode_title">
+            <h1>Create a Wiki Page</h1>
+            <!-- <p><span></span></p> -->
+        </div>
+        <form action="/admin" class="row" method="post">
+            <div class="col-lg-12 form-group">
+                <div class="small_text">Slug</div>
+                <input type="text" class="form-control" name="slug" id="slug" placeholder="What is an ocean" required>
+            </div>
+
+            <div style="margin-top: 15px;" class="col-lg-12 form-group">
+                <textarea name="wiki" id="wiki"></textarea>
+            </div>
+
+            <select id="mySelect" name="category" class="col-lg-12 form-group" tabindex="-98">
+                {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.category_name }}</option>
+                {% endfor %}
+            </select>
+
+            <div class="col-lg-12 form-group">
+                <div class="check_box">
+                    <input type="checkbox" value="1" id="squared2" name="check">
+                    <label class="l_text" for="squared2"><span>Admin Only?</span></label>
+                </div>
+            </div>
+
+            <div class="col-lg-12 text-center">
+                <button type="submit" class="btn action_btn thm_btn">Create</button>
+            </div>
+        </form>
+        <footer>
+            <div class="border_bottom"></div>
+            <div class="row feedback_link">
+                <div class="col-lg-6">
+                    <h6><i class="icon_mail_alt"></i>Still stuck? <a href="/contact-us">How can we
+                            help?</a></h6>
+                </div>
+            </div>
+        </footer>
+    </article>
+</div>
+</div>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+<script>
+    var editor = ClassicEditor
+        .create( document.querySelector( '#wiki' ) )
+        .then( editor => {
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+
+{% endblock %}

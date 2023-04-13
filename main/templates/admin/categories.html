@@ -1,0 +1,71 @@
+{% extends 'admin/layout.html' %}
+
+
+{% block content %}
+
+<div class="col-lg-7 col-md-8">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    {% if category == 'error' %}
+    <div class="alert alert-danger alert-dismissable fade show">
+        {{ message }}
+    </div>
+    {% elif category == 'success' %}
+    <div class="alert alert-success alter-dismissable fade show" role="alert">
+        {{ message }}
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div id="post" class="documentation_info">
+        <article class="documentation_body typography_content" id="documentation">
+            <div class="shortcode_title">
+                <h1>Add/Delete Categories</h1>
+                <p><span>Select</span> any category, either you delete them or add more its upto you!</p>
+            </div>
+
+            <form action="/admin/categories" class="row" method="post">
+                <input type="hidden" value="add" name="type">
+                <div class="col-lg-12 text-center">
+                    <div class="col-lg-12 form-group">
+                        <div class="small_text">Category Name</div>
+                        <input type="text" class="form-control" name="category" id="category" placeholder="Ocean Category"
+                            required>
+                    </div>
+                </div>
+                <br><br>
+                <div class="col-lg-12 text-center">
+                    <button type="submit" class="btn action_btn thm_btn">Add</button>
+                </div>
+            </form>
+            <br><br>
+            <form action="/admin/categories" class="row" method="post">
+                <input type="hidden" value="delete" name="type">
+                <div class="col-lg-12 text-center">
+                    <select id="mySelect" name="category_id" class="col-lg-12 form-group" tabindex="-98">
+                        {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.category_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <br><br>
+                <div class="col-lg-12 text-center">
+                    <button type="submit" class="btn action_btn thm_btn">Delete</button>
+                </div>
+            </form>
+
+            <footer>
+                <div class="border_bottom"></div>
+                <div class="row feedback_link">
+                    <div class="col-lg-6">
+                        <h6><i class="icon_mail_alt"></i>Still stuck? <a href="/contact-us">How can we
+                                help?</a></h6>
+                    </div>
+                </div>
+            </footer>
+        </article>
+    </div>
+</div>
+{% endblock %}

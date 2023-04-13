@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="sign_right signup_right container">
+    <div class="sign_inner signup_inner">
+        <div class="text-center" style="margin-top: 50px;">
+            <h3>Sign in to DOMAIN NAME</h3>
+            <p>Don’t have an account yet? <a href="/sign-up">Sign up here</a></p>
+        </div>
+        <div class="divider">
+            <span class="or-text">or</span>
+        </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        {% if category == 'error' %}
+        <div class="alert alert-danger alert-dismissable fade show">
+            {{ message }}
+        </div>
+        {% elif category == 'success' %}
+        <div class="alert alert-success alter-dismissable fade show" role="alert">
+            {{ message }}
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <form action="/login" class="row login_form" method="post">
+            <div class="col-lg-12 form-group">
+                <div class="small_text">Your email</div>
+                <input type="email" class="form-control" id="email" name="email" placeholder="email@yourdomain.com">
+            </div>
+            <div class="col-lg-12 form-group">
+                <div class="small_text">Confirm password</div>
+                <div class="confirm_password">
+                    <input id="confirm-password" name="password" type="password" class="form-control"
+                        autocomplete="off">
+                </div>
+            </div>
+            <div class="col-lg-12 form-group">
+                <div class="check_box">
+                    <input type="checkbox" value="1" id="squared2" name="check">
+                    <label class="l_text" for="squared2"><span>Remember Me</span></label>
+                </div>
+            </div>
+
+            <div class="col-lg-12 text-center">
+                <button type="submit" class="btn action_btn thm_btn">Sign in</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

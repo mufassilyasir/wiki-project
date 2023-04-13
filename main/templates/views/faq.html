@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<section class="doc_faq_area_two sec_pad">
+    <div class="container">
+        <div class="section_title text-center">
+            <h2 class="h_title wow fadeInUp">Frequently Asked Questions</h2>
+            <p class="wow fadeInUp" data-wow-delay="0.2s">Below are some of the Frequently Asked Questions.</p>
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="tab-content pl_70" id="myTabContent">
+                    <div class="tab-pane faq_tab_pane fade show active" id="online" role="tabpanel"
+                        aria-labelledby="online-tab">
+                        <div class="accordion doc_faq_info" id="accordionExample">
+                            {% for faq in faqs %}
+                            <div class="card wow fadeInUp" data-wow-delay="0.6s">
+                                <div class="card-header" id="heading{{ faq.id }}">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                            data-target="#collapse{{ faq.id }}" aria-expanded="false"
+                                            aria-controls="collapse{{ faq.id }}">
+                                            {{ faq.question }} <i class="icon_plus"></i><i
+                                                class="icon_minus-06"></i>
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapse{{ faq.id }}" class="collapse" aria-labelledby="heading{{ faq.id }}"
+                                    data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        {{ faq.answer }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

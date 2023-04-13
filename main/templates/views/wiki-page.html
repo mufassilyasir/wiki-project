@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/assets/bootstrap/css/bootstrap-select.min.css">
+    <!-- icon css-->
+    <link rel="stylesheet" href="/static/assets/font-awesome/css/all.css">
+    <link rel="stylesheet" href="/static/assets/elagent-icon/style.css">
+    <link rel="stylesheet" href="/static/assets/font-awesome/css/all.css">
+    <link rel="stylesheet" href="/static/assets/niceselectpicker/nice-select.css">
+    <link rel="stylesheet" href="/static/assets/animation/animate.css">
+    <link rel="stylesheet" href="/static/assets/prism/prism.css">
+    <link rel="stylesheet" href="/static/assets/prism/prism-coy.css">
+    <link rel="stylesheet" href="/static/assets/mcustomscrollbar/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="/static/assets/thdoan-magnify/css/magnify.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/responsive.css">
+    <title>KbDoc</title>
+</head>
+
+<body data-spy="scroll" data-target="#navbar-example3" data-offset="86" data-scroll-animation="true" class="doc">
+    <div id="preloader">
+        <div id="ctn-preloader" class="ctn-preloader">
+            <div class="round_spinner">
+                <div class="spinner"></div>
+                <div class="text">
+                    <img src="/static/img/spinner_logo.png" alt="">
+                    <h4><span>kb</span>Doc</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="body_wrapper">
+        <nav class="navbar navbar-expand-lg menu_one">
+            <div class="container custom_container">
+                <a class="navbar-brand sticky_logo" href="index.html">
+                    <img src="/static/img/logo-w.png" srcset="/static/img/logo-w2x.png 2x" alt="logo">
+                    <img src="/static/img/logo.png" srcset="/static/img/logo-2x.png 2x" alt="logo">
+                </a>
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="menu_toggle">
+                        <span class="hamburger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                        <span class="hamburger-cross">
+                            <span></span>
+                            <span></span>
+                        </span>
+                    </span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav menu ml-auto">
+                        <li class="nav-item dropdown submenu">
+                            <a href="/" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item dropdown submenu">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                Categories
+                            </a>
+                            <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="false"
+                                data-toggle="dropdown"></i>
+                            <ul class="dropdown-menu">
+                                {% for category in categories %}
+                                <li class="nav-item"><a href="/category/{{ category.id }}" class="nav-link">{{ category.category_name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown submenu">
+                            <a href="#" class="nav-link">Featured Page</a>
+                        </li>
+                        <li class="nav-item dropdown submenu">
+                            <a href="/contact-us" class="nav-link">Contact Us</a>
+                        </li>
+                    </ul>
+                    {% if logged_in != True %}
+                    <ul class="navbar-nav menu ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav_btn" href="/login"><i class="icon_profile"></i>Log In</a>
+                        </li>
+                    </ul>
+                    {% else %}
+                    <ul class="navbar-nav menu ml-auto">
+                        <li class="nav-item dropdown submenu active">
+                            <a href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"><i class="icon_profile"></i>{{ name }}</a>
+                            <ul class="dropdown-menu">
+                                {% if admin == True %}
+                                <li class="nav-item"><a href="/admin" class="nav-link">Admin</a></li>
+                                {% endif %}
+                                <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+        <section class="breadcrumb_area">
+            <img class="p_absolute bl_left" src="/static/img/v.svg" alt="">
+            <img class="p_absolute bl_right" src="/static/img/home_one/b_leaf.svg" alt="">
+            <img class="p_absolute star" src="/static/img/home_one/banner_bg.png" alt="">
+            <img class="p_absolute wave_shap_one" src="/static/img/blog-classic/shap_01.png" alt="">
+            <img class="p_absolute wave_shap_two" src="/static/img/blog-classic/shap_02.png" alt="">
+            <img class="p_absolute one wow fadeInRight" src="/static/img/home_one/b_man_two.png" alt="">
+            <img class="p_absolute two wow fadeInUp" data-wow-delay="0.2s" src="/static/img/home_one/flower.png" alt="">
+            <div class="container custom_container">
+                <form action="/search?search" class="banner_search_form banner_search_form_two" method="post">
+                    <div class="input-group">
+                        <input type="search" class="form-control" placeholder='Search' name="search">
+                        <div class="input-group-append">
+                            <select class="custom-select" id="inlineFormCustomSelect">
+                                <option selected>All Category</option>
+                            </select>
+                        </div>
+                        <button type="submit"><i class="icon_search"></i></button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section class="page_breadcrumb">
+            <div class="container custom_container">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Docs</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">KbDoc WordPress Theme</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-sm-5">
+                        <a href="#" class="date"><i class="icon_clock_alt"></i>Updated on March 03, 2020</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="doc_documentation_area" id="sticky_doc">
+            <div class="overlay_bg"></div>
+            <div class="container custom_container">
+                <div class="row">
+                    <div class="col-lg-3 doc_mobile_menu">
+                        <aside class="doc_left_sidebarlist">
+                            <div class="open_icon" id="left">
+                                <i class="arrow_carrot-right"></i>
+                                <i class="arrow_carrot-left"></i>
+                            </div>
+                            <div class="scroll">
+                                <ul class="list-unstyled nav-sidebar">
+                                    <h6>On this page:</h6>
+                                    <nav class="list-unstyled doc_menu" id="navbar-example3">
+                                        {% for item in toc %}
+                                        <li>
+                                            <a href="#{{ item.id }}" class="nav-link">{{ item.text }}</a>
+                                        </li>
+                                        {% endfor %}
+                                    </nav>
+                                </ul>
+                            </div>
+                        </aside>
+                    </div>
+                    <div class="col-lg-7 col-md-8">
+                        <div id="post" class="documentation_info">
+                            <article class="documentation_body typography_content" id="documentation">
+                                <div class="shortcode_title">
+                                    <h1>{{ wiki.title }}</h1>
+                                    <!-- <p><span></span></p> -->
+                                </div>
+
+                                {% if updated_html != None %}
+                                {{ updated_html | safe }}
+                                {% else %}
+                                {{ wiki.html | safe }}
+                                {% endif %}
+
+                                <footer>
+                                    <div class="border_bottom"></div>
+                                    <div class="row feedback_link">
+                                        <div class="col-lg-6">
+                                            <h6><i class="icon_mail_alt"></i>Still stuck? <a href="#"
+                                                    data-toggle="modal" data-target="#exampleModal3">How can we
+                                                    help?</a></h6>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <p>Was this page helpful? <a href="#" class="h_btn">Yes</a><a href="#"
+                                                    class="h_btn">No</a></p>
+                                        </div>
+                                    </div>
+                                </footer>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 doc_right_mobile_menu">
+                        <div class="open_icon" id="right">
+                            <i class="arrow_carrot-left"></i>
+                            <i class="arrow_carrot-right"></i>
+                        </div>
+                        <div class="doc_rightsidebar scroll">
+                            <div class="doc_switch">
+                                <label for="something" class="tab-btn tab-btns"><i
+                                        class="icon_lightbulb_alt"></i></label>
+                                <input type="checkbox" name="something" id="something" class="tab_switcher">
+                                <label for="something" class="tab-btn"><i class="far fa-moon"></i></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="simple_footer">
+            <img class="leaf_right" src="/static/img/home_one/leaf_footter.png" alt="">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <p>© 2020 All Rights Reserved by <a href="index.html">KbDoc</a></p>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <ul class="list-unstyled f_social_icon">
+                            <li><a href="#"><i class="social_facebook"></i></a></li>
+                            <li><a href="#"><i class="social_twitter"></i></a></li>
+                            <li><a href="#"><i class="social_vimeo"></i></a></li>
+                            <li><a href="#"><i class="social_linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div class="modal fade img_modal" id="exampleModal3" tabindex="-3" role="dialog" aria-hidden="false">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class=" icon_close"></i>
+        </button>
+        <div class="modal-dialog help_form" role="document">
+            <div class="modal-content">
+                <div class="shortcode_title">
+                    <h1>How can we help?</h1>
+                    <p>A premium WordPress theme with integrated Knowledge Base,<br>providing 24/7 community based
+                        support.</p>
+                </div>
+                <form action="#" class="contact_form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Subject">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="Message" id="massage" placeholder="Massage"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn action_btn">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/static/js/jquery-3.2.1.min.js"></script>
+    <script src="/static/js/pre-loader.js"> </script>
+    <script src="/static/assets/bootstrap/js/popper.min.js"></script>
+    <script src="/static/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/assets/bootstrap/js/bootstrap-select.min.js"></script>
+    <script src="/static/assets/font-size/js/rv-jquery-fontsize-2.0.3.js"></script>
+    <script src="/static/js/parallaxie.js"></script>
+    <script src="/static/js/TweenMax.min.js"></script>
+    <script src="/static/js/anchor.js"></script>
+    <script src="/static/assets/wow/wow.min.js"></script>
+    <script src="/static/assets/prism/prism.js"></script>
+    <script src="/static/assets/niceselectpicker/jquery.nice-select.min.js"></script>
+    <script src="/static/assets/mcustomscrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="/static/assets/thdoan-magnify/js/jquery.magnify.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+
+</html>

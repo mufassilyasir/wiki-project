@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/assets/bootstrap/css/bootstrap.min.css">
+    <!-- icon css-->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/responsive.css">
+    <link rel="stylesheet" href="assets/font-awesome/css/all.css">
+    <link rel="stylesheet" href="assets/elagent-icon/style.css">
+    <link rel="stylesheet" href="assets/font-awesome/css/all.css">
+    <link rel="stylesheet" href="assets/niceselectpicker/nice-select.css">
+    <link rel="stylesheet" href="assets/animation/animate.css">
+    <link rel="stylesheet" href="assets/prism/prism.css">
+    <link rel="stylesheet" href="assets/prism/prism-coy.css">
+    <link rel="stylesheet" href="assets/mcustomscrollbar/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="assets/thdoan-magnify/css/magnify.css">
+    <title>KbDoc</title>
+</head>
+
+<body data-scroll-animation="true">
+    <div id="preloader">
+        <div id="ctn-preloader" class="ctn-preloader">
+            <div class="round_spinner">
+                <div class="spinner"></div>
+                <div class="text">
+                    <img src="/static/img/spinner_logo.png" alt="">
+                    <h4><span>kb</span>Doc</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="body_wrapper">
+        <nav class="navbar navbar-expand-lg menu_two" id="sticky">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="/static/img/logo.png" srcset="/static/img/logo-2x.png 2x" alt="logo">
+                </a>
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="menu_toggle">
+                        <span class="hamburger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                        <span class="hamburger-cross">
+                            <span></span>
+                            <span></span>
+                        </span>
+                    </span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav menu dk_menu ml-auto">
+                        {% if home == True %}
+                        <li class="nav-item active">
+                            <a href="/" class="nav-link dropdown-toggle">Home</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a href="/" class="nav-link dropdown-toggle">Home</a>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item dropdown submenu">
+                            <a href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+                            <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="true" data-toggle="dropdown"></i>
+                            <ul class="dropdown-menu">
+                                {% for category in categories %}
+                                <li class="nav-item"><a href="/category/{{ category.id }}" class="nav-link">{{ category.category_name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/" class="nav-link dropdown-toggle">Featured Page</a>
+                        </li>
+                        {% if faq == True %}
+                        <li class="nav-item dropdown submenu active">
+                            <a href="/faq" class="nav-link">FAQs</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item dropdown submenu">
+                            <a href="/faq" class="nav-link">FAQs</a>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a href="/contact-us" class="nav-link dropdown-toggle">Contact Us</a>
+                        </li>
+                    </ul>
+                    {% if logged_in != True %}
+                    <ul class="navbar-nav menu ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav_btn" href="/login"><i class="icon_profile"></i>Log In</a>
+                        </li>
+                    </ul>
+                    {% else %}
+                    <ul class="navbar-nav menu ml-auto">
+                        <li class="nav-item dropdown submenu active">
+                            <a href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"><i class="icon_profile"></i>{{ name }}</a>
+                            <ul class="dropdown-menu">
+                                {% if admin == True %}
+                                <li class="nav-item"><a href="/admin" class="nav-link">Admin</a></li>
+                                {% endif %}
+                                <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+
+        {% block content %}{% endblock %}
+
+        <footer class="footer_area footer_p_top f_bg_color">
+            <img class="p_absolute leaf" src="/static/img/v.svg" alt="">
+            <img class="p_absolute f_man wow fadeInLeft" data-wow-delay="0.4s" src="/static/img/home_two/f_man.png"
+                alt="">
+            <img class="p_absolute f_cloud" src="/static/img/home_two/cloud.png" alt="">
+            <img class="p_absolute f_email" src="/static/img/home_two/email-icon.png" alt="">
+            <img class="p_absolute f_email_two" src="/static/img/home_two/email-icon_two.png" alt="">
+            <img class="p_absolute f_man_two wow fadeInLeft" data-wow-delay="0.2s" src="/static/img/home_two/man.png"
+                alt="">
+            <div class="footer_top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="f_widget subscribe_widget wow fadeInUp">
+                                <a href="index.html" class="f_logo"><img src="/static/img/logo.png" alt=""></a>
+                                <h4 class="c_head">Subscribe to our newsletter</h4>
+                                <form action="#" class="footer_subscribe_form">
+                                    <input type="email" placeholder="Email" class="form-control">
+                                    <button type="submit" class="s_btn">Send</button>
+                                </form>
+                                <ul class="list-unstyled f_social_icon">
+                                    <li><a href="#"><i class="social_facebook"></i></a></li>
+                                    <li><a href="#"><i class="social_twitter"></i></a></li>
+                                    <li><a href="#"><i class="social_vimeo"></i></a></li>
+                                    <li><a href="#"><i class="social_linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="f_widget link_widget pl_30 wow fadeInUp" data-wow-delay="0.2s">
+                                <h3 class="f_title">Company</h3>
+                                <ul class="list-unstyled link_list">
+                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="#">Testimonials</a></li>
+                                    <li><a href="#">Affiliates</a></li>
+                                    <li><a href="#">Partners</a></li>
+                                    <li><a href="#">Careers</a></li>
+                                    <li><a href="#">KbDoc for Good</a></li>
+                                    <li><a href="#">Contact Us</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-sm-6">
+                            <div class="f_widget link_widget wow fadeInUp" data-wow-delay="0.4s">
+                                <h3 class="f_title">Support</h3>
+                                <ul class="list-unstyled link_list">
+                                    <li><a href="index-3.html">Help Desk</a></li>
+                                    <li><a href="#">Knowledge Base</a></li>
+                                    <li><a href="#">Live Chat</a></li>
+                                    <li><a href="#">Integrations</a></li>
+                                    <li><a href="#">Reports</a></li>
+                                    <li><a href="#">iOS & Android</a></li>
+                                    <li><a href="#">Messages</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="f_widget link_widget pl_70 wow fadeInUp" data-wow-delay="0.6s">
+                                <h3 class="f_title">Doc Pages</h3>
+                                <ul class="list-unstyled link_list">
+                                    <li><a href="doclist.html">Doc Topic</a></li>
+                                    <li><a href="#">Free Training</a></li>
+                                    <li><a href="doc-archive.html">Doc Archive</a></li>
+                                    <li><a href="changelog.html">Changelog</a></li>
+                                    <li><a href="Onepage.html">Onepage Docs</a></li>
+                                    <li><a href="#">Conversion Tracking</a></li>
+                                    <li><a href="cheatsheet.html">Cheatseet</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border_bottom"></div>
+                </div>
+            </div>
+            <div class="footer_bottom text-center">
+                <div class="container">
+                    <p>©
+                        <script>document.write(new Date().getFullYear())</script> All Rights Reserved by <a
+                            href="index.html">KbDoc</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Back to top button -->
+    <a id="back-to-top" title="Back to Top"></a>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/static/js/jquery-3.2.1.min.js"></script>
+    <script src="/static/js/pre-loader.js"></script>
+    <script src="/static/assets/bootstrap/js/popper.min.js"></script>
+    <script src="/static/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/js/parallaxie.js"></script>
+    <script src="/static/js/TweenMax.min.js"></script>
+    <script src="/static/js/jquery.wavify.js"></script>
+    <script src="/static/assets/wow/wow.min.js"></script>
+    <script src="/static/assets/counterup/jquery.counterup.min.js"></script>
+    <script src="/static/assets/counterup/jquery.waypoints.min.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/bootstrap/js/bootstrap-select.min.js"></script>
+    <script src="/static/js/font-size/js/rv-jquery-fontsize-2.0.3.js"></script>
+    <script src="/static/js/anchor.js"></script>
+    <script src="/static/js/prism/prism.js"></script>
+    <script src="/static/js/niceselectpicker/jquery.nice-select.min.js"></script>
+    <script src="/static/js/mcustomscrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="/static/js/thdoan-magnify/js/jquery.magnify.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<section class="breadcrumb_area">
+    <img class="p_absolute bl_left" src="/static/img/v.svg" alt="">
+    <img class="p_absolute bl_right" src="/static/img/home_one/b_leaf.svg" alt="">
+    <img class="p_absolute star" src="/static/img/home_one/banner_bg.png" alt="">
+    <img class="p_absolute wave_shap_one" src="/static/img/blog-classic/shap_01.png" alt="">
+    <img class="p_absolute wave_shap_two" src="/static/img/blog-classic/shap_02.png" alt="">
+    <img class="p_absolute one wow fadeInRight" src="/static/img/home_one/b_man_two.png" alt="">
+    <img class="p_absolute two wow fadeInUp" data-wow-delay="0.2s" src="/static/img/home_one/flower.png" alt="">
+    <div class="container custom_container">
+        <form action="/search?search" class="banner_search_form banner_search_form_two" method="post">
+            <div class="input-group">
+                <input type="search" class="form-control" placeholder='Search' name="search">
+                <button type="submit" class="search_btn">Search</button>
+            </div>
+        </form>
+    </div>
+</section>
+<br><br>
+<div class="row">
+    <div class="container">
+        <div class="tab-content pl_70" id="myTabContent">
+            {% if results|length == 0 %}
+            <h3 class="text-center container">Nothing Found</h3>
+            {% else %}
+            {% for result in results %}
+            <div class="card wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <a href="/wiki/{{ result.slug }}">{{ result.title }}</a><i class="icon_plus"></i><i class="icon_minus-06"></i>
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        {{ result.html|truncate(1000, True, '...')|striptags  }}
+                    </div>
+                </div>
+            </div>
+            <br><br>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock%}

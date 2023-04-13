@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<section class="breadcrumb_area breadcrumb_area_four">
+    <img class="p_absolute bl_left" src="/static/img/v.svg" alt="">
+    <img class="p_absolute bl_right" src="/static/img/home_one/b_leaf.svg" alt="">
+    <img class="p_absolute one wow fadeInRight" src="/static/img/home_one/b_man_two.png" alt="">
+    <div class="container">
+        <div class="breadcrumb_content_two text-center">
+            <h2>Contact</h2>
+        </div>
+    </div>
+</section>
+<section class="contact_area sec_pad">
+    <div class="container">
+        <div class="contact_info">
+            <div class="section_title text-left">
+                <h2 class="h_title wow fadeInUp">Let’s start the conversation</h2>
+                <p>Please fill the form, we’ll happy to assist you.</p>
+            </div>
+            <form action="/contact-us" class="contact_form" method="post">
+                <div class="row contact_fill">
+                    <div class="col-lg-4 form-group">
+                        <h6>Full Name</h6>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Enter your name here"required>
+                    </div>
+                    <div class="col-lg-4 form-group">
+                        <h6>Email</h6>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="info@KbDoc.com" required>
+                    </div>
+                    <div class="col-lg-4 form-group">
+                        <h6>Phone no</h6>
+                        <input type="tel" class="form-control" name="phone" id="phone" placeholder="+1">
+                    </div>
+                    <div class="col-lg-12 form-group">
+                        <h6>Message</h6>
+                        <textarea class="form-control message" id="message" placeholder="Enter Your Text ..." required></textarea>
+                    </div>
+                    <div class="col-lg-12 form-group">
+                        <button type="submit" class="btn action_btn thm_btn">Send Message</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

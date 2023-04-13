@@ -1,0 +1,55 @@
+{% extends 'admin/layout.html' %}
+
+{% block content %}
+
+<div class="col-lg-7 col-md-8">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    {% if category == 'error' %}
+    <div class="alert alert-danger alert-dismissable fade show">
+        {{ message }}
+    </div>
+    {% elif category == 'success' %}
+    <div class="alert alert-success alter-dismissable fade show" role="alert">
+        {{ message }}
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div id="post" class="documentation_info">
+        <article class="documentation_body typography_content" id="documentation">
+            <div class="shortcode_title">
+                <h1>Delete a Wiki Page</h1>
+                <p><span>Select</span> any wiki page and click delete to delete the wiki page.</p>
+            </div>
+
+            <form action="/admin/delete-wiki" class="row" method="post">
+                <div class="col-lg-12 text-center">
+                    <select id="mySelect" name="wikipage_select" class="" tabindex="-98">
+                        {% for wikipage in wikipages %}
+                        <option value="{{ wikipage.slug }}">{{ wikipage.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <br><br><br><br>
+                <div class="col-lg-12 text-center">
+                    <button type="submit" class="btn action_btn thm_btn">Delete</button>
+                </div>
+            </form>
+
+            <footer>
+                <div class="border_bottom"></div>
+                <div class="row feedback_link">
+                    <div class="col-lg-6">
+                        <h6><i class="icon_mail_alt"></i>Still stuck? <a href="/contact-us">How can we
+                                help?</a></h6>
+                    </div>
+                </div>
+            </footer>
+        </article>
+    </div>
+</div>
+
+{% endblock %}
